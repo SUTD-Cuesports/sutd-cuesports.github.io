@@ -20,6 +20,8 @@ import { calcElo } from "@/lib/elo";
 import { supabase } from "@/lib/supabase";
 import { cn } from "@/lib/utils";
 
+const SPECIAL_BOYS = [1, 2, 3, 5];
+
 interface Score {
   player1: number;
   player2: number;
@@ -44,9 +46,18 @@ export function Race() {
   function handleRack(score: Score) {
     if (player1 === null || player2 === null) return;
     setRaceStatus(score);
+
     if (score.player1 !== raceLength && score.player2 !== raceLength) return;
 
     const diffs = calcElo(player1, player2, score, handicap);
+
+    if (SPECIAL_BOYS.includes(player1.id) && diffs.player2 < 0) {
+      diffs.player2 = 0;
+    }
+    if (SPECIAL_BOYS.includes(player2.id) && diffs.player1 < 0) {
+      diffs.player1 = 0;
+    }
+
     setDiffs(diffs);
 
     Promise.all([

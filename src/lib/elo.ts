@@ -1,10 +1,10 @@
 import { Player } from "./types";
 
 // Is there a rational for this K? idk i just put it because it seems
-const K = 3;
+const K = 12;
 
 export function getExpectedPercentage(player1: Player, player2: Player) {
-  const a = 1 / (1 + Math.pow(10, (player2.rating - player1.rating) / 400));
+  const a = 1 / (1 + Math.pow(10, (player2.rating - player1.rating) / 1200));
   return {
     player1: a,
     player2: 1 - a,
