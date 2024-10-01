@@ -51,10 +51,18 @@ export function Race() {
 
     const diffs = calcElo(player1, player2, score, handicap);
 
-    if (SPECIAL_BOYS.includes(player1.id) && diffs.player2 < 0) {
+    if (
+      SPECIAL_BOYS.includes(player1.id) &&
+      !SPECIAL_BOYS.includes(player2.id) &&
+      diffs.player2 < 0
+    ) {
       diffs.player2 = 0;
     }
-    if (SPECIAL_BOYS.includes(player2.id) && diffs.player1 < 0) {
+    if (
+      SPECIAL_BOYS.includes(player2.id) &&
+      !SPECIAL_BOYS.includes(player1.id) &&
+      diffs.player1 < 0
+    ) {
       diffs.player1 = 0;
     }
 
