@@ -11,8 +11,8 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      VITE_SUPABASE_PROJECT_URL: ${{  VITE_SUPABASE_PROJECT_URL }}
-      VITE_SUPABASE_ANON_KEY: ${{ VITE_SUPABASE_ANON_KEY }}
+      VITE_SUPABASE_PROJECT_URL: ${{  vars.VITE_SUPABASE_PROJECT_URL }}
+      VITE_SUPABASE_ANON_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY }}
 
     steps:
       - name: Checkout repo
