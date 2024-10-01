@@ -10,6 +10,10 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
 
+    env:
+      VITE_SUPABASE_PROJECT_URL: ${{  VITE_SUPABASE_PROJECT_URL }}
+      VITE_SUPABASE_ANON_KEY: ${{ VITE_SUPABASE_ANON_KEY }}
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
@@ -22,9 +26,6 @@ jobs:
 
       - name: Build project
         run: npm run build
-        env:
-          VITE_SUPABASE_PROJECT_URL: ${{  VITE_SUPABASE_PROJECT_URL }}
-          VITE_SUPABASE_ANON_KEY: ${{ VITE_SUPABASE_ANON_KEY }}
 
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v3
