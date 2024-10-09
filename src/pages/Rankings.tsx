@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 import { ArrowUpDown } from "lucide-react";
 import { ColumnDef } from "@tanstack/react-table";
 
@@ -56,12 +56,15 @@ const columns: ColumnDef<Player>[] = [
 export function Rankings() {
   const rankings = useContext(RankingsContext);
 
-  const data =
-    rankings.status === "LOADING"
-      ? "Loading..."
-      : rankings.status === "ERROR"
-      ? rankings.msg
-      : rankings.data;
+  const data = useMemo(
+    () =>
+      rankings.status === "LOADING"
+        ? "Loading..."
+        : rankings.status === "ERROR"
+        ? rankings.msg
+        : rankings.data.filter((p) => !p.isVirgin),
+    [rankings]
+  );
 
   return (
     <div>

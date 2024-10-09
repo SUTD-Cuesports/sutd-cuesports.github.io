@@ -71,11 +71,11 @@ export function Race() {
     Promise.all([
       supabase
         .from("rankings")
-        .update({ rating: player1.rating + diffs.player1 })
+        .update({ rating: player1.rating + diffs.player1, isVirgin: false })
         .eq("id", player1.id),
       supabase
         .from("rankings")
-        .update({ rating: player2.rating + diffs.player2 })
+        .update({ rating: player2.rating + diffs.player2, isVirgin: false })
         .eq("id", player2.id),
     ]).then(() => rankings.reload());
   }
@@ -247,7 +247,7 @@ export function Race() {
                   }
 
                   const value = parseInt(e.target.value);
-                  if (!isNaN(value) && isFinite(value) && length >= 0) {
+                  if (!isNaN(value) && isFinite(value) && value >= 0) {
                     changeRaceLength(value);
                   }
                 }}
