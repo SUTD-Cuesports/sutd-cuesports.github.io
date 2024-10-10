@@ -20,7 +20,7 @@ import { calcElo } from "@/lib/elo";
 import { supabase } from "@/lib/supabase";
 import { cn } from "@/lib/utils";
 
-const SPECIAL_BOYS = [1, 2, 3, 5];
+const SPECIAL_BOYS = [1, 2, 3, 4, 5];
 
 interface Score {
   player1: number;
