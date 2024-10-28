@@ -12,15 +12,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { RankingsContext } from "@/lib/rankings";
+import { RankingsContext, SPECIAL_BOYS } from "@/lib/rankings";
 import { Player } from "@/lib/types";
 import { useContext, useState } from "react";
 import { Crown, PlusIcon, X } from "lucide-react";
 import { calcElo } from "@/lib/elo";
 import { supabase } from "@/lib/supabase";
 import { cn } from "@/lib/utils";
-
-const SPECIAL_BOYS = [1, 2, 3, 4, 5];
 
 interface Score {
   player1: number;

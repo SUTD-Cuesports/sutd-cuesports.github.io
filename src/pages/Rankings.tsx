@@ -1,11 +1,11 @@
 import { useContext, useMemo } from "react";
-import { ArrowUpDown } from "lucide-react";
+import { ArrowUpDown, Gem, Trash2 } from "lucide-react";
 import { ColumnDef } from "@tanstack/react-table";
 
 import { DataTable } from "@/components/ui/data-table";
 import { Player } from "@/lib/types";
 import { Button } from "@/components/ui/button";
-import { RankingsContext } from "@/lib/rankings";
+import { RankingsContext, SPECIAL_BOYS } from "@/lib/rankings";
 
 const columns: ColumnDef<Player>[] = [
   {
@@ -27,7 +27,17 @@ const columns: ColumnDef<Player>[] = [
   },
   {
     accessorKey: "name",
-    cell: ({ row }) => <div className="px-4">{row.renderValue("name")}</div>,
+    cell: ({ row }) => (
+      <div className="px-4 flex items-center">
+        {row.renderValue("name")}
+        {SPECIAL_BOYS.includes(row.original.id) &&
+          (row.index < 10 ? (
+            <Gem className="h-3 mt-[2px] inline " />
+          ) : (
+            <Trash2 className="h-3 mt-[2px] inline text-red-500" />
+          ))}
+      </div>
+    ),
     header: ({ column }) => {
       return (
         <Button
