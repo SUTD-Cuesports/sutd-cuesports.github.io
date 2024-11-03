@@ -61,6 +61,21 @@ const columns: ColumnDef<Player>[] = [
     // minSize: 20,
     maxSize: 40,
   },
+  {
+    accessorKey: "rating",
+    cell: ({ row }) => (
+      <div className="text-center">
+        {row.original.win}/{row.original.loss}
+      </div>
+    ),
+    header: () => (
+      <div className="text-center">
+        {window.innerWidth < 512 ? "W/L" : "Win/Loss"}
+      </div>
+    ),
+    // minSize: 20,
+    maxSize: 40,
+  },
 ];
 
 export function Rankings() {

@@ -91,14 +91,27 @@ export function Race() {
   function finishMatch() {
     if (!raceStatus || !player1 || !player2 || !diffs) return;
 
+    const [winKey1, winKey2] =
+      raceStatus.player1 === raceLength
+        ? (["win", "loss"] as const)
+        : (["loss", "win"] as const);
+
     Promise.all([
       supabase
         .from("rankings")
-        .update({ rating: player1.rating + diffs.player1, isVirgin: false })
+        .update({
+          rating: player1.rating + diffs.player1,
+          isVirgin: false,
+          [winKey1]: player1[winKey1] + 1,
+        })
         .eq("id", player1.id),
       supabase
         .from("rankings")
-        .update({ rating: player2.rating + diffs.player2, isVirgin: false })
+        .update({
+          rating: player2.rating + diffs.player2,
+          isVirgin: false,
+          [winKey2]: player2[winKey2] + 1,
+        })
         .eq("id", player2.id),
     ]).then(() => rankings.reload());
 

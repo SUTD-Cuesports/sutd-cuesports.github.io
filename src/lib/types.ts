@@ -3,4 +3,6 @@ export interface Player {
   name: string;
   rating: number;
   isVirgin: boolean;
+  win: number;
+  loss: number;
 }

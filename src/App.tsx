@@ -13,7 +13,8 @@ function App() {
     const res = await supabase
       .from("rankings")
       .select("*")
-      .order("rating", { ascending: false });
+      .order("rating", { ascending: false })
+      .order("id", { ascending: true });
 
     if (res.error) {
       setRankings({
