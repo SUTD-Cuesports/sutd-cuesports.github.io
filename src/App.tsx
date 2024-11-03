@@ -4,6 +4,7 @@ import { Race } from "./pages/Race";
 import { RankingsInfo, RankingsContext } from "./lib/rankings";
 import { useEffect, useState } from "react";
 import { supabase } from "./lib/supabase";
+import { Toaster } from "./components/ui/toaster";
 
 function App() {
   const [rankings, setRankings] = useState<RankingsInfo>({ status: "LOADING" });
@@ -42,7 +43,8 @@ function App() {
 
   return (
     <RankingsContext.Provider value={{ ...rankings, reload: loadRankings }}>
-      <Tabs defaultValue="rankings">
+      <Toaster />
+      <Tabs defaultValue="rankings" className="min-h-screen">
         <TabsList>
           <TabsTrigger value="rankings">Rankings</TabsTrigger>
           <TabsTrigger value="race">Race</TabsTrigger>
